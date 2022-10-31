@@ -83,8 +83,16 @@ const RootQuery = new GraphQLObjectType({
         author:{
             type:AuthorType,
             args:{id:{type:GraphQLID}},
-            resolve(parent,args){
-                return Author.findById(args.id);
+            resolve:async(parent,args)=>{
+                try {
+                    const autors =await Author.findById(args.id);
+                    return authors
+                    
+                } catch (error) {
+                    return error
+                    
+                }
+                
                 
                 // return _.find(authors,{id:args.id})
             }
@@ -113,7 +121,7 @@ const Mutation = new GraphQLObjectType({
             type:AuthorType,
             args:{
                 name:{type:new GraphQLNonNull(GraphQLString)},
-                age:{type:new GraphQLNonNull(GraphQLInt)}
+                age:{type:new GraphQLNonNull(GraphQLID)}
             },
             resolve(parent,args){
                 const author = new Author({
