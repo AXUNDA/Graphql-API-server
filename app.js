@@ -5,13 +5,13 @@ const myschema = require("./schema/schema.js")
 const app = express();
 var cors = require('cors')
 app.use(cors())
-app.use("/graphql",graphqlHTTP({
+app.use("/graphql", graphqlHTTP({
     schema: myschema,
     graphiql: true
 
 
 
 }));
-app.listen(4000, function(){
+app.listen(process.env.PORT || 3000, function () {
     console.log('app is active')
 });
