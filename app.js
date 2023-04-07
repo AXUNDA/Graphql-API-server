@@ -5,7 +5,7 @@ const myschema = require("./schema/schema.js")
 const app = express();
 var cors = require('cors')
 app.use(cors())
-app.use("/graphql", graphqlHTTP({
+app.use("/", graphqlHTTP({
     schema: myschema,
     graphiql: true
 
